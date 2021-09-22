@@ -27,9 +27,7 @@
 # @raycast.authorURL https://github.com/tonka3000
 # @raycast.description Show merge requests from GitLab
 
-
-# Configuration
-# see gitlabconfig.py
+# Configuration: see gitlabconfig.py
 
 # Main program
 
@@ -37,19 +35,23 @@ from gitlabhelper import GitLab
 import textwrap
 
 gitlab = GitLab()
-data = gitlab.get_call("merge_requests?state=opened&scope=assigned_to_me")
-print(f"GitLab Merge requests assigned to you on {gitlab.instance}/:\n")
+
+data = gitlab.get_call("merge_requests?state=opened&author_username=manu.morante")
 
 for e in data:
+  created_at = e.get("created_at")
   title = e.get("title")
   state = e.get("state")
   web_url = e.get("web_url")
   author = e.get("author")
+  target_branch = e.get("target_branch")
   name = author.get("name")
   username = author.get("username")
-  reference = e.get("references", {}).get("full")
   description = textwrap.shorten(e.get("description"), width=420, placeholder="...")
-  print(f"[{state}] * {title} at {reference}\n")
-  print(f"{description}\n")
-  print(f"{web_url}\n")
-  print(f"By {name} @{username}\n")
+  labels = e.get("labels")
+
+  print(f"🔃 {title}")
+  print(f"{name} -> {target_branch}")
+  print(f"{web_url}\n\n")
+
+# print(f"{data}")

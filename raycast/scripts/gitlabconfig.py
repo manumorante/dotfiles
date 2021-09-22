@@ -3,7 +3,7 @@
 #
 
 # GitLab instance like https://gitlab.com
-instance = "https://gitlab.com"
+instance = "https://gitlab.domestika.org"
 
 # Personal access token, see https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#creating-a-personal-access-token
 pat = "KUv6KFmxejFBAvttzdPT"

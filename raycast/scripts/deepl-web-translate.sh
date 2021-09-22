@@ -20,31 +20,10 @@
 ### Language codes:
 
 # Bulgarian: bg
-# Chinese simplified: zh
-# Czech: cs
-# Danish: da
-# Dutch: nl
-# English (American and British): en
-# Estonian: et
-# Finnish: fi
-# German: de
-# Greek: el
-# Hungarian: hu
-# Italian: it
-# Japanese: ja
-# Latvian: lv
-# Lithuanian: lt
-# Polish: pl
-# Portuguese (Brazilian and Portuguese): pt
-# Romanian: ro
-# Russian: ru
-# Slovak: sk
-# Slovenian: sl
+# English: en
 # Spanish: es
-# Swedish: sv
 
 # It's not usually necessary to specify a "from" language as DeepL will auto-detect it, however on very short inputs it can be helpful
-
 # You can enter no inputs just to bring up the DeepL website
 
 # Configure your default language code here:
