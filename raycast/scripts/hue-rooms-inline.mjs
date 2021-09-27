@@ -1,9 +1,10 @@
 #!/usr/bin/env zx
+// import {$} from 'zx'
 
 // Required parameters:
 // @raycast.schemaVersion 1
 // @raycast.title Rooms
-// @raycast.mode inline
+// @raycast.mode fullOutput
 // @raycast.packageName Philips Hue
 
 // Optional parameters:
@@ -26,19 +27,27 @@
 // Follow the steps here for the bridge IP and how to create a username:
 // https://developers.meethue.com/develop/get-started-2/
 
-// Remember to remove .template from the filename after customizing.
-
 // Config:
 
-const hueBridgeIP = '<enter bridge ip here>' // e.g 192.168.1.2
-const userID = '<enter username here>' // e.g 1028d66426293e821ecfd9ef1a0731df
+const hueBridgeIP = '192.168.1.132' // e.g 192.168.1.2
+const userID = 'xqrSVqT4UCK3MhE7-HOdo9bfbmTsiig0-vdYUfW-' // e.g 1028d66426293e821ecfd9ef1a0731df
 const specificOutput = true // true for e.g "2/2 lights on", false for "All on" / "Some on" / "All off"
+
+/////////
+
+// Probando:
+// http://192.168.1.132/debug/clip.html?commandurl=%2Fapi&messagebody=&response=%5B%0D%0A%09%7B%0D%0A%09%09%22error%22%3A+%7B%0D%0A%09%09%09%22type%22%3A+1%2C%0D%0A%09%09%09%22address%22%3A+%22%2F%22%2C%0D%0A%09%09%09%22description%22%3A+%22unauthorized+user%22%0D%0A%09%09%7D%0D%0A%09%7D%0D%0A%5D
+
+/////////
+
+// Hecho en Ruby para El Gato (por si se puede copiar)
+// https://github.com/raycast/script-commands/blob/master/commands/home/elgato/elgato-key-light-turn-on.template.rb
 
 // Optional:
 // Specify which rooms you want to include, in order, by their name (case sensitive).
 // These names must have already been assigned to the rooms via the Hue app.
 // Use an empty array for all rooms.
-const chosenRooms = [] // E.g ['Bedroom', 'Study']
+const chosenRooms = ['Oficina', 'Dormitorio'] // E.g ['Bedroom', 'Study']
 
 // Optional:
 // If you want to use a different room name to the name in your Hue settings, you can assign that here.
