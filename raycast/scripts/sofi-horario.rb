@@ -2,14 +2,14 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Horario
+# @raycast.title Sofi Horario
 # @raycast.mode fullOutput
 
 # Optional parameters:
-# @raycast.icon 🤖
+# @raycast.icon 🌸
 
 # Documentation:
-# @raycast.description Sofía Hamman
+# @raycast.description Sofía: horario en Hamman
 # @raycast.author Manu Morante
 # @raycast.authorURL https://github.com/manumorante
 
