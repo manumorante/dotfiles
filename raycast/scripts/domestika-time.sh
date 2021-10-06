@@ -12,7 +12,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Domestika
+# @raycast.title Antiguedad en Domestika
 # @raycast.mode inline
 
 # Conditional parameters:
