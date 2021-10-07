@@ -2,30 +2,57 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Sofi Horario
+# @raycast.title Horario
 # @raycast.mode fullOutput
 
 # Optional parameters:
 # @raycast.icon 🌸
+# @raycast.packageName Horario
 
 # Documentation:
-# @raycast.description Sofía: horario en Hamman
+# @raycast.description Horario
 # @raycast.author Manu Morante
 # @raycast.authorURL https://github.com/manumorante
 
+BLACK =	30
 RED = 31
 GREEN = 32
 YELLOW = 33
+BLUE = 34
+MAGENTA = 35
+CYAN = 36
+WHITE = 97
+
+BLACK_BG =	40
+RED_BG = 41
+GREEN_BG = 42
+YELLOW_BG = 43
+BLUE_BG = 44
+MAGENTA_BG = 45
+CYAN_BG = 46
+WHITE_BG = 107
 
 def c(text, color)
   "\e[#{color}m#{text}\e[0m"
 end
 
+# Configuración
+
+PERSON = "Sofia"
+
+# Turnos
+SHIFTS = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00' ]
+
+# Dias de la semana en español
+DAYS_NAME = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+
+# Cadena para separar los dias
+DAY_BREAK = "BMK"
+
+################################################################################
+
 raw = %Q(
-  Cuadrante de trabajadores para la semanda del 4 de Octubre de 2021 al 10 de Octubre de 2021
-  Turno Lunes (04-10-2021) Martes (05-10-2021) Miércoles (06-10-2021) Jueves (07-10-2021) Viernes (08-10-2021) Sábado (09-10-2021) Domingo (10-10-2021)
-           09:30
-            10:00
+10:00
 (AE) Irene 2
 (AE) Jesús 2
 (ASE) MaJosé 2
@@ -381,61 +408,46 @@ Roles masajistas: (M) Masajista (A) Anfitrión (AV) Ayudante de vestuario (AA) A
 
 )
 
-# Configuración
-
-person = "Sofia"
-
-# Horario
-hours = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00' ]
-
-# Dias de la semana en español
-dayName = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
-
-# Cadena para separar los dias
-dayBreakString = "BMK"
-
-# 
-
 # Quitar saltos de linea
-raw = raw.tr("\n", " ")
+RAW = raw.tr("\n", " ")
 
-# Crea un array con la posicion index de cada hora
-hoursPos = []
-hours.each_with_index do |hour, index|
-  hoursPos[index] = raw.index(hours[index])
+# Crea array con posicion cada turno
+SHIFTS_POS = []
+SHIFTS.each_with_index do | hour, index |
+  SHIFTS_POS[index] = RAW.index(SHIFTS[index])
 end
 
-# Dias de la semana
-daysWork = [[], [], [], [], [], [], []]
-
-# Para cada posicion
-7.times do |hoursPosIndex|
-  currentHourPos = hoursPos[hoursPosIndex]
-  nextHourPos = hoursPos[hoursPosIndex + 1]
-  
-  # Fila de hora contine todos los dias para la hora actual
-  rowHour = raw[currentHourPos..nextHourPos]
-
-  # Separar los dias de cada hora
-  days = rowHour.split(dayBreakString)
-  
-  7.times do |daysIndex|
-    if days[daysIndex].include?(person)
-      daysWork[daysIndex] << hours[hoursPosIndex]
+# Salida: dias con la informacion de turnos
+DAYS_WORK = [[], [], [], [], [], [], []]
+def generateWorkDays(days, index)
+  7.times do |i|
+    if days[i].include?(PERSON)
+      DAYS_WORK[i] << SHIFTS[index]
     end
   end
 end
 
-7.times do |index|
-  if daysWork[index].length <= 0
-    puts c(dayName[index], GREEN)
-    puts c('Libre', GREEN)
-  else
-    puts dayName[index]
-    puts "#{daysWork[index].join(", ")}"
-  end
+# Recorro las posiciones para tomar el contenido que hay entre cada dos turnos.
+# Ese contenido será todos los dias del turno.
+7.times do | shift_pos_i |
+  current_pos = SHIFTS_POS[shift_pos_i]
+  next_pos = SHIFTS_POS[shift_pos_i + 1]
+  
+  # Fila de hora contine todos los dias para la hora actual
+  shift_row = RAW[current_pos..next_pos]
 
-  puts ''
+  # Separar los dias de cada hora
+  days = shift_row.split(DAY_BREAK)
+
+  generateWorkDays(shift_row.split(DAY_BREAK), shift_pos_i)
+end
+
+7.times do | i |
+  if DAYS_WORK[i].length <= 0
+    puts c("#{DAYS_NAME[i]} libre", GREEN)
+  else
+    puts "#{c(c(DAYS_NAME[i], WHITE), BLACK_BG)} #{DAYS_WORK[i].join(", ")}"
+  end
 end
 
 changelog = [
