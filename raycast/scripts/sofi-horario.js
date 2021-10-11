@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // @raycast.schemaVersion 1
-// @raycast.title aaa
+// @raycast.title Sofia
 // @raycast.mode fullOutput
 // @raycast.packageName Manu Scripts
 // @raycast.icon 🌸
@@ -14,8 +14,7 @@ let dataBuffer = fs.readFileSync(FILE_PATH)
 
 // Configuración
 
-/***********************************
-  Example
+/* * * * * * * * * * * * * * * * *
   Turno   Lunes       Martes
   10:00   (A) Maria   (AE) Juan
           (M) Sofia   (AE) Pepe
@@ -23,139 +22,63 @@ let dataBuffer = fs.readFileSync(FILE_PATH)
   12:00   (M) Pepe    (AE) Sofia
           (M) Sofia   (AE) Maria
           TMMD        TMMD
-*************************************/
+* * * * * * * * * * * * * * * * * */
 
-// const PERSON      = 'Katia'
 const PERSON      = 'Sofia'
-const TURNS       = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00']
+const TURNS       = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00', '01:00', '02:00']
 const DAYS_NAME   = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
 const DAY_BREAK   = 'TMMD'
-let   DATA        = ''
 
-// Load PDF file and save text data as global
+/**
+ * TODO
+ * [ ] Get and show rol (A, M, AE, ...)
+ * [ ] Green color for Free day
+ * [ ] Color for tables
+ * 
+ * TESTS:
+ * [ ] Error file not found
+ * [ ] File not pdf
+ * [ ] File PDF but no text
+ * [ ] Text not split string
+ */
+
+let dataJSON = [[], [], [], [], [], [], []]
+
 pdf(dataBuffer).then(function(data) {
-  DATA = data.text
+	let turns_row = data.text.split(':00')
+  let rol = ''
 
-	init()
+  turns_row.forEach((turn, turnID) => {
+    days = turn.split(DAY_BREAK)
+
+    days.forEach((day, dayID) => {
+      if(day.includes(PERSON)){
+        day.split('\n').forEach((line) => {
+          if(line.includes(PERSON)) {
+            rol = line.substring(1, 2)
+          }
+        })
+        dataJSON[dayID].push([turnID, rol])
+      }
+    })
+  })
+
+  dataJSON.forEach((day, dayID) => {
+    let out = ''
+    let dayName = DAYS_NAME[dayID] + '     '
+    out = dayName.substring(0, 10)
+    
+    if(day.length) {
+      let rol = day[0][1]
+      let turnStart = day[0][0]
+      let turnEnd   = day[day.length-1][0] + 1
+
+      out += `(${rol})   ${TURNS[turnStart]}   `
+      out += TURNS[turnEnd]
+    } else {
+      out += 'LIBRE'
+    }
+
+    console.log(out)
+  })
 })
-
-// Return array
-function _toArray(obj) {
-  if (Array.isArray(obj)) {
-    return obj
-  } else {
-    return obj.split('\n')
-  }
-}
-
-// Get turn by id info for all days
-function _getTurn(turnID) {
-  return DATA.split(':00')[turnID]
-}
-
-// Get days
-function _getDays(turn) {
-  return turn.split(DAY_BREAK)
-}
-
-// Get persons form a day by id
-function _getPersons(days, dayID){
-  return _toArray(days[dayID-1])
-}
-
-// Get days from row
-// Use example:
-//   Lunes (1) a las 10:00 (1)
-//   getDay(1, 1)
-function getDay(dayID, turnID, all = false) {
-  let turn = _getTurn(turnID)
-  let days = _getDays(turn)
-  let persons = _getPersons(days, dayID)
-  
-  // If `all` is true then show all people
-  // if not then filter by `person`
-  persons = persons.filter((x) => {
-    return all || x.includes(PERSON)
-  })
-
-  return persons
-}
-
-
-function work(persons) {
-  return Boolean(getDay(dayID, turnID).length)
-}
-
-function printDaysAll(){
-  DAYS_NAME.forEach((day, dayID) => {
-    dayID = dayID + 1
-    console.log(`${day} ${dayID}`)
-
-    TURNS.forEach((turn, turnID) => {
-      turnID = turnID + 1
-      console.log(`${turn} ${turnID}`)
-
-      let todos = getDay(dayID, turnID, true)
-      let person = getDay(dayID, turnID)
-
-      if(Boolean(person.length)){
-
-      }
-    })
-    
-    console.log(``)
-  })
-}
-
-function printDays(){
-  DAYS_NAME.forEach((day, dayID) => {
-    dayID = dayID + 1
-
-    TURNS.forEach((turn, turnID) => {
-      turnID = turnID + 1
-
-      let person = getDay(dayID, turnID)
-
-      if(Boolean(person.length)){
-        console.log(`${day}`)
-        console.log(`${turn}`)
-        console.log(``)
-      }
-    })
-    
-    console.log(``)
-  })
-}
-
-
-// Init
-function init() {
-
-  printDays()
-  // test()
-
-  // console.log(DATA.split(':00'))
-
-  // DATA.split(':00').forEach((line, index) => {
-  //   console.log(`${line} ${index}`)    
-  // })
-}
-
-
-function test(){
-  console.log(`------------------------------`)
-  console.log(`TODOS LOS TRABAJADORES`)
-  
-  console.log(`Lunes a las 10:00 (TODOS)`)
-  console.log(getDay(1, 1, true))
-  
-  console.log(`Domingo a las 24:00 (TODOS)`)
-  console.log(getDay(7, 8, true))
-    
-  // console.log(`Jueves a las 16:00`)
-  // console.log(getDay(4, 4, true))
-  
-  // console.log(`SOLO ${PERSON}`)
-  // console.log(getDay(4, 4))
-  console.log(`------------------------------`)  
-}
