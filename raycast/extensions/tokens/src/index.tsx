@@ -2,7 +2,7 @@ import { ActionPanel, CopyToClipboardAction, List, showToast, ToastStyle } from 
 import { useState, useEffect } from "react";
 import fs from "fs";
 
-const LOCAL_JSON = "/Users/manu/projects/dotfiles/raycast/scripts/tokens.json"
+const CSS_FILE = '/Users/manu/projects/frontend/packages/styles/src/grid/base.css'
 
 export default function UtilityList() {
   const [state, setState] = useState<{ utilities: Utility[] }>({ utilities: [] });
@@ -49,19 +49,53 @@ function UtilityListItem(props: { article: Utility }) {
   );
 }
 
-async function fetchUtilities(): Promise<Utility[]> {
-  if (fs.existsSync(LOCAL_JSON)) {
-    try {
-      const response = fs.readFileSync(LOCAL_JSON, {encoding:'utf8', flag:'r'});
-      const json = JSON.parse(response);
-      return (json as Record<string, unknown>).items as Utility[];
-    } catch (error) {
-      console.error(error);
-      showToast(ToastStyle.Failure, "Could not load items");
-      return Promise.resolve([]);
+// Load CSS file, parse and return as JSON
+function parseCSS() {
+  const data = fs.readFileSync(CSS_FILE, {encoding:'utf8', flag:'r'});
+  let JSONasString = ''
+  let total = 0
+
+  data.split('\n').forEach(line => {
+    if (line.includes('{ ')) {
+      total += 1
+      line = line.replace(/^\./, '')
+      line = line.replace(/\\/g, '')
+      line = line.replace('{ ', '')
+      line = line.replace(' }', '')
+  
+      const title = line.split(' ')[0]
+      let subtitle = line.split(' ').slice(1).join(' ')
+      const accessory = subtitle.split(':')[0]
+  
+      subtitle = subtitle.replace(/"/g, '\'')
+      subtitle = subtitle.replace(/;$/, '')
+  
+      JSONasString = JSONasString + `{
+        "id": "${total}::${accessory}",
+        "title": "${title}",
+        "subtitle": "${subtitle}",
+        "accessory": "${accessory}"\r
+      },`
     }
-  } else {
-    showToast(ToastStyle.Failure, `Error loading file(${LOCAL_JSON})`);
+  })
+
+  JSONasString = `{
+    "items": [
+      ${JSONasString}
+      { "title": "end" }
+    ]
+  }`
+
+  return JSON.parse(JSONasString)
+}
+
+async function fetchUtilities(): Promise<Utility[]> {  
+  try {
+    const json = parseCSS()
+    return (json as Record<string, unknown>).items as Utility[];  
+  } catch (error) {
+    console.error(error)
+    showToast(ToastStyle.Failure, `Error loading CSS_FILE(${CSS_FILE})`);
     return Promise.resolve([]);
   }
 }
