@@ -15,6 +15,7 @@ const fs = require('fs')
 const data = fs.readFileSync(FILE_IN, {encoding:'utf8', flag:'r'});
 
 let fileJSON = ''
+let types = []
 let total = 0
 
 data.split('\n').forEach(line => {
@@ -38,6 +39,11 @@ data.split('\n').forEach(line => {
       "subtitle": "${subtitle}",
       "accessory": "${accessory}"\r
     },`
+
+    // Insertar element al array de tipos
+    if (!types.includes(accessory)) {
+      types.push(accessory)
+    }
   }
 })
 
@@ -49,3 +55,6 @@ fileJSON = `{
 }`
 
 fs.writeFileSync(FILE_OUT, fileJSON, {encoding:'utf8', flag:'w'});
+
+
+console.log(types)
