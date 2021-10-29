@@ -20,29 +20,116 @@ export default function UtilityList() {
 
   return (
     <List isLoading={state.utilities.length === 0} searchBarPlaceholder="Filter ...">
-      {state.utilities.map((article) => (
-        <UtilityListItem key={article.id} article={article} />
+      {state.utilities.map((utility) => (
+        <UtilityListItem key={utility.id} utility={utility} />
       ))}
     </List>
   );
 }
 
-function UtilityListItem(props: { article: Utility }) {
-  const article = props.article;
+function getIcon(key: string ) {
+  const ICON_TYPES = {
+    "font-family": "🔠",
+    "font-size": "🔠",
+    "font-weight": "🔠",
+    "display": "📦",
+    "-webkit-box-orient": "📦",
+    "flex-direction": "📦",
+    "flex-wrap": "📦",
+    "flex-flow": "📦",
+    "flex": "📦",
+    "flex-basis": "📦",
+    "column-gap": "📦",
+    "row-gap": "📦",
+    "position": "📍",
+    "top": "📍",
+    "right": "📍",
+    "bottom": "📍",
+    "left": "📍",
+    "overflow": "👀",
+    "overflow-y": "👀",
+    "-webkit-overflow-scrolling": "👀",
+    "-webkit-line-clamp": "👀",
+    "background-color": "🖼",
+    "background": "🖼",
+    "background-image": "🖼",
+    "background-repeat": "🖼",
+    "background-position-x": "🖼",
+    "background-position-y": "🖼",
+    "background-size": "🖼",
+    "color": "🖍",
+    "cursor": "🐭",
+    "max-width": "📐",
+    "min-width": "📐",
+    "min-height": "📐",
+    "height": "📐",
+    "width": "📐",
+    "margin": "📐",
+    "margin-top": "📐",
+    "margin-right": "📐",
+    "margin-bottom": "📐",
+    "margin-left": "📐",
+    "padding": "📐",
+    "padding-top": "📐",
+    "padding-right": "📐",
+    "padding-bottom": "📐",
+    "padding-left": "📐",
+    "border": "🔳",
+    "border-width": "🔳",
+    "border-top": "🔳",
+    "border-bottom": "🔳",
+    "border-left": "🔳",
+    "border-right": "🔳",
+    "border-bottom-right-radius": "🔳",
+    "border-bottom-left-radius": "🔳",
+    "border-bottom-color": "🔳",
+    "border-bottom-style": "🔳",
+    "border-bottom-width": "🔳",
+    "border-style": "🔳",
+    "border-color": "🔳",
+    "border-radius": "🔳",
+    "box-shadow": "⬜️",
+    "box-sizing": "📦",
+    "list-style-type": "🔠",
+    "text-decoration": "🔠",
+    "line-height": "🔠",
+    "text-align": "🔠",
+    "text-transform": "🔠",
+    "white-space": "🔠",
+    "outline": "🔠",
+    "outline-color": "🔳",
+    "z-index": "👀",
+    "align-items": "📦",
+    "align-self": "📦",
+    "justify-content": "📦",
+    "appearance": "🔳",
+    "pointer-events": "🐭",
+    "transform": "📐",
+    "opacity": "👀",
+    "transition-property": "🏃🏻‍♂️",
+    "transition-timing-function": "🏃🏻‍♂️",
+    "transition-duration": "🏃🏻‍♂️",
+  }
+
+  return ICON_TYPES[key] || "🔹";
+}
+
+function UtilityListItem(props: { utility: Utility }) {
+  const utility = props.utility;
 
   return (
     <List.Item
-      id={article.id}
-      key={article.id}
-      title={article.title}
-      subtitle={article.subtitle}
-      icon="🔹"
-      accessoryTitle={article.accessory}
+      id={utility.id}
+      key={utility.id}
+      title={utility.title}
+      subtitle={utility.subtitle}
+      icon={getIcon(utility.accessory)}
+      accessoryTitle={utility.accessory}
       actions={
         <ActionPanel>
-          <CopyToClipboardAction title="Copy utility name" content={article.title} />
-          <CopyToClipboardAction title="Copy CSS" content={article.subtitle} />
-          <CopyToClipboardAction title="Copy complete selector" content={`.${article.title} { ${article.subtitle} }`} />
+          {/* <CopyToClipboardAction title="Copy utility name" content={utility.title} />
+          <CopyToClipboardAction title="Copy CSS" content={utility.subtitle} /> */}
+          <CopyToClipboardAction title="Copy type" content={utility.accessory} />
         </ActionPanel>
       }
     />
