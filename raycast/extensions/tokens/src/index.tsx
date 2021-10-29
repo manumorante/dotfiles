@@ -127,9 +127,8 @@ function UtilityListItem(props: { utility: Utility }) {
       accessoryTitle={utility.accessory}
       actions={
         <ActionPanel>
-          {/* <CopyToClipboardAction title="Copy utility name" content={utility.title} />
-          <CopyToClipboardAction title="Copy CSS" content={utility.subtitle} /> */}
-          <CopyToClipboardAction title="Copy type" content={utility.accessory} />
+          <CopyToClipboardAction title="Copy utility" content={utility.title} />
+          <CopyToClipboardAction title="Copy CSS" content={utility.subtitle} />
         </ActionPanel>
       }
     />
