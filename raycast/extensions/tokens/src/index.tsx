@@ -1,36 +1,33 @@
 import { ActionPanel, CopyToClipboardAction, List, showToast, ToastStyle } from "@raycast/api";
 import { useState, useEffect } from "react";
-import fetch from "node-fetch";
 import fs from "fs";
 
-const SERVER_JSON = "http://localhost:2222/tokens.json"
 const LOCAL_JSON = "/Users/manu/projects/dotfiles/raycast/scripts/tokens.json"
-// const PASSWORDS = `${os.homedir()}/Library/Containers/com.agilebits.onepassword7/Data/Library/Caches/Metadata/1Password`;
 
-export default function ArticleList() {
-  const [state, setState] = useState<{ articles: Article[] }>({ articles: [] });
+export default function UtilityList() {
+  const [state, setState] = useState<{ utilities: Utility[] }>({ utilities: [] });
 
   useEffect(() => {
     async function fetch() {
-      const articles = await fetchArticles();
+      const utilities = await fetchUtilities();
       setState((oldState) => ({
         ...oldState,
-        articles: articles,
+        utilities: utilities,
       }));
     }
     fetch();
   }, []);
 
   return (
-    <List isLoading={state.articles.length === 0} searchBarPlaceholder="Filter ...">
-      {state.articles.map((article) => (
-        <ArticleListItem key={article.id} article={article} />
+    <List isLoading={state.utilities.length === 0} searchBarPlaceholder="Filter ...">
+      {state.utilities.map((article) => (
+        <UtilityListItem key={article.id} article={article} />
       ))}
     </List>
   );
 }
 
-function ArticleListItem(props: { article: Article }) {
+function UtilityListItem(props: { article: Utility }) {
   const article = props.article;
 
   return (
@@ -39,7 +36,7 @@ function ArticleListItem(props: { article: Article }) {
       key={article.id}
       title={article.title}
       subtitle={article.subtitle}
-      icon="list-icon.png"
+      icon="🔹"
       accessoryTitle={article.accessory}
       actions={
         <ActionPanel>
@@ -52,19 +49,24 @@ function ArticleListItem(props: { article: Article }) {
   );
 }
 
-async function fetchArticles(): Promise<Article[]> {
-  try {
-    const response = await fetch(SERVER_JSON);
-    const json = await response.json();
-    return (json as Record<string, unknown>).items as Article[];
-  } catch (error) {
-    console.error(error);
-    showToast(ToastStyle.Failure, "Could not load items");
+async function fetchUtilities(): Promise<Utility[]> {
+  if (fs.existsSync(LOCAL_JSON)) {
+    try {
+      const response = fs.readFileSync(LOCAL_JSON, {encoding:'utf8', flag:'r'});
+      const json = JSON.parse(response);
+      return (json as Record<string, unknown>).items as Utility[];
+    } catch (error) {
+      console.error(error);
+      showToast(ToastStyle.Failure, "Could not load items");
+      return Promise.resolve([]);
+    }
+  } else {
+    showToast(ToastStyle.Failure, `Error loading file(${LOCAL_JSON})`);
     return Promise.resolve([]);
   }
 }
 
-type Article = {
+type Utility = {
   id: string;
   title: string;
   subtitle: string;
