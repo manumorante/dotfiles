@@ -1,15 +1,15 @@
 {
-  "name": "tokens",
-  "title": "Tokens",
-  "description": "Search for tokens",
+  "name": "search-utility",
+  "title": "Search for utility",
+  "description": "Search for utility",
   "icon": "command-icon.png",
   "author": "manumorante",
   "license": "MIT",
   "commands": [
     {
       "name": "index",
-      "title": "Tokens",
-      "subtitle": "Search …",
+      "title": "Search for utility",
+      "subtitle": "Search by name or prpp ...",
       "description": "Search for tokens by name.",
       "mode": "view"
     }

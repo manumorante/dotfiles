@@ -19,7 +19,7 @@ export default function UtilityList() {
   }, []);
 
   return (
-    <List isLoading={state.utilities.length === 0} searchBarPlaceholder="Filter ...">
+    <List isLoading={state.utilities.length === 0} searchBarPlaceholder="Search by name or prop ...">
       {state.utilities.map((utility) => (
         <UtilityListItem key={utility.id} utility={utility} />
       ))}
@@ -125,6 +125,7 @@ function UtilityListItem(props: { utility: Utility }) {
       subtitle={utility.subtitle}
       icon={getIcon(utility.accessory)}
       accessoryTitle={utility.accessory}
+      keywords={[utility.accessory]}
       actions={
         <ActionPanel>
           <CopyToClipboardAction title="Copy utility" content={utility.title} />
