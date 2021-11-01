@@ -1,5 +1,5 @@
 {
-  "name": "search-utility",
+  "name": "ds-utility",
   "title": "Search for utility",
   "description": "Search for utility",
   "icon": "command-icon.png",
@@ -9,8 +9,8 @@
     {
       "name": "index",
       "title": "Search for utility",
-      "subtitle": "Search by name or prpp ...",
-      "description": "Search for tokens by name.",
+      "subtitle": "Search utility by name or prpp ...",
+      "description": "Search utility by name or prpp.",
       "mode": "view"
     }
   ],
