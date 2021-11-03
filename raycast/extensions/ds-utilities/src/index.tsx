@@ -1,8 +1,63 @@
 import { ActionPanel, CopyToClipboardAction, List, showToast, ToastStyle } from "@raycast/api";
 import { useState, useEffect } from "react";
+
 import fs from "fs";
 
 const CSS_FILE = '/Users/manu/projects/frontend/packages/styles/src/grid/base.css'
+
+
+const DEFAULT_NOT_CAT = {
+  "name": "Not category",
+  "icon": "⬜️"
+}
+
+const PROPS_CATEGORIES = [
+  {
+    "name": "Text",
+    "icon": "🔠",
+    "props": ["font-family", "font-size", "font-weight", "list-style-type", "text-decoration", "line-height", "text-align", "text-transform", "white-space", "outline"]
+  },
+  {
+    "name": "Box model",
+    "icon": "📦",
+    "props": ["display", "flex-direction", "flex-wrap", "flex-flow", "flex", "flex-basis", "column-gap", "row-gap", "box-sizing", "align-items", "align-self", "justify-content", "-webkit-box-orient"]
+  },
+  {
+    "name": "Position",
+    "icon": "📍",
+    "props": ["position", "top", "right", "bottom", "left"]
+  },
+  {
+    "name": "Visibility",
+    "icon": "👀",
+    "props": ["overflow", "overflow-y", "z-index", "opacity"]
+  },
+  {
+    "name": "Background",
+    "icon": "🖼",
+    "props": ["background-color", "background", "background-image", "background-repeat", "background-position-x", "background-position-y", "background-size"]
+  },
+  {
+    "name": "Color",
+    "icon": "🖍",
+    "props": ["color"]
+  },
+  {
+    "name": "Manipulation",
+    "icon": "🔧",
+    "props": ["transform", "transition-property", "transition-timing-function", "transition-duration"]
+  },
+  {
+    "name": "FX",
+    "icon": "✨",
+    "props": ["cursor", "box-shadow", "border", "border-width", "border-top", "border-bottom", "border-left", "border-right", "border-bottom-right-radius", "border-bottom-left-radius", "border-bottom-color", "border-bottom-style", "border-bottom-width", "border-style", "border-color", "border-radius", "outline-color", "appearance", "pointer-events"]
+  },
+  {
+    "name": "Dimensions",
+    "icon": "📐",
+    "props": ["max-width", "min-width", "min-height", "height", "width", "margin", "margin-top", "margin-right", "margin-bottom", "margin-left", "padding", "padding-top", "padding-right", "padding-bottom", "padding-left"]
+  },
+]
 
 export default function UtilityList() {
   const [state, setState] = useState<{ utilities: Utility[] }>({ utilities: [] });
@@ -27,95 +82,19 @@ export default function UtilityList() {
   );
 }
 
-function getIcon(key: string ) {
-  const ICON_TYPES = {
-    "font-family": "🔠",
-    "font-size": "🔠",
-    "font-weight": "🔠",
-    "display": "📦",
-    "-webkit-box-orient": "📦",
-    "flex-direction": "📦",
-    "flex-wrap": "📦",
-    "flex-flow": "📦",
-    "flex": "📦",
-    "flex-basis": "📦",
-    "column-gap": "📦",
-    "row-gap": "📦",
-    "position": "📍",
-    "top": "📍",
-    "right": "📍",
-    "bottom": "📍",
-    "left": "📍",
-    "overflow": "👀",
-    "overflow-y": "👀",
-    "-webkit-overflow-scrolling": "👀",
-    "-webkit-line-clamp": "👀",
-    "background-color": "🖼",
-    "background": "🖼",
-    "background-image": "🖼",
-    "background-repeat": "🖼",
-    "background-position-x": "🖼",
-    "background-position-y": "🖼",
-    "background-size": "🖼",
-    "color": "🖍",
-    "cursor": "🐭",
-    "max-width": "📐",
-    "min-width": "📐",
-    "min-height": "📐",
-    "height": "📐",
-    "width": "📐",
-    "margin": "📐",
-    "margin-top": "📐",
-    "margin-right": "📐",
-    "margin-bottom": "📐",
-    "margin-left": "📐",
-    "padding": "📐",
-    "padding-top": "📐",
-    "padding-right": "📐",
-    "padding-bottom": "📐",
-    "padding-left": "📐",
-    "border": "🔳",
-    "border-width": "🔳",
-    "border-top": "🔳",
-    "border-bottom": "🔳",
-    "border-left": "🔳",
-    "border-right": "🔳",
-    "border-bottom-right-radius": "🔳",
-    "border-bottom-left-radius": "🔳",
-    "border-bottom-color": "🔳",
-    "border-bottom-style": "🔳",
-    "border-bottom-width": "🔳",
-    "border-style": "🔳",
-    "border-color": "🔳",
-    "border-radius": "🔳",
-    "box-shadow": "⬜️",
-    "box-sizing": "📦",
-    "list-style-type": "🔠",
-    "text-decoration": "🔠",
-    "line-height": "🔠",
-    "text-align": "🔠",
-    "text-transform": "🔠",
-    "white-space": "🔠",
-    "outline": "🔠",
-    "outline-color": "🔳",
-    "z-index": "👀",
-    "align-items": "📦",
-    "align-self": "📦",
-    "justify-content": "📦",
-    "appearance": "🔳",
-    "pointer-events": "🐭",
-    "transform": "📐",
-    "opacity": "👀",
-    "transition-property": "🏃🏻‍♂️",
-    "transition-timing-function": "🏃🏻‍♂️",
-    "transition-duration": "🏃🏻‍♂️",
-  }
-
-  return ICON_TYPES[key] || "🔹";
+// Search prop in our categories list
+// - if found, return the category
+// - if not found, return the default category
+function getPropCategory(prop: string ) {
+  const filterCat = PROPS_CATEGORIES.filter((category) => {
+    return category.props.includes(prop)
+  })
+  return (filterCat.length > 0) ? filterCat[0] : DEFAULT_NOT_CAT
 }
 
 function UtilityListItem(props: { utility: Utility }) {
   const utility = props.utility;
+  const cat = getPropCategory(utility.accessory)
 
   return (
     <List.Item
@@ -123,9 +102,9 @@ function UtilityListItem(props: { utility: Utility }) {
       key={utility.id}
       title={utility.title}
       subtitle={utility.subtitle}
-      icon={getIcon(utility.accessory)}
-      accessoryTitle={utility.accessory}
-      keywords={[utility.accessory]}
+      icon={cat.icon}
+      accessoryTitle={`${utility.accessory} ${cat.name}`}
+      keywords={[utility.accessory, cat.name]}
       actions={
         <ActionPanel>
           <CopyToClipboardAction title="Copy utility" content={utility.title} />
@@ -136,7 +115,7 @@ function UtilityListItem(props: { utility: Utility }) {
   );
 }
 
-// Load CSS file, parse and return as JSON
+// Load file, parse and return as JSON
 function parseCSS() {
   const data = fs.readFileSync(CSS_FILE, {encoding:'utf8', flag:'r'});
   let JSONasString = ''
@@ -156,6 +135,10 @@ function parseCSS() {
   
       subtitle = subtitle.replace(/"/g, '\'')
       subtitle = subtitle.replace(/;$/, '')
+
+      // Remove `var()`
+      subtitle = subtitle.replace(/var\(/g, '')
+      subtitle = subtitle.replace(/\)/g, '')
   
       JSONasString = JSONasString + `{
         "id": "${total}::${accessory}",
