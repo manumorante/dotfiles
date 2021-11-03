@@ -1,4 +1,4 @@
-import { ActionPanel, CopyToClipboardAction, List, showToast, ToastStyle } from "@raycast/api";
+import { ActionPanel, PasteAction, Icon, List, showToast, ToastStyle } from "@raycast/api";
 import { useState, useEffect } from "react";
 
 import fs from "fs";
@@ -107,8 +107,10 @@ function UtilityListItem(props: { utility: Utility }) {
       keywords={[utility.accessory, cat.name]}
       actions={
         <ActionPanel>
-          <CopyToClipboardAction title="Copy utility" content={utility.title} />
-          <CopyToClipboardAction title="Copy CSS" content={utility.subtitle} />
+          <PasteAction icon={Icon.Hammer} title="Paste utility" content={utility.title} />
+          <PasteAction icon={Icon.Gear} title="Paste CSS" content={utility.subtitle} />
+          <PasteAction title="Paste category name" content={cat.name} />
+          <PasteAction title="Paste category icon" content={cat.icon} />
         </ActionPanel>
       }
     />
