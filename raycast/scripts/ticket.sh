@@ -20,4 +20,4 @@ branch_name_splited=(${branch_name//-/ })
 code=${branch_name_splited[1]}
 ticket="[sc-$code]"
 echo $ticket | pbcopy
-echo "Copied to clipboard"
+echo "$ticket copied to clipboard"
