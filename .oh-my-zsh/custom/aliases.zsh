@@ -1,3 +1,8 @@
+# Easier navigation: .., -
+alias ..="cd .."
+alias cd..="cd .."
+alias -- -="cd -"
+
 # Open Visual Studio Code or Cursor
 alias code='cursor'
 # alias code='vscode'
