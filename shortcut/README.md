@@ -2,9 +2,17 @@
 
 Colección de funciones Bash para interactuar con la API de Shortcut y gestionar ramas vinculadas a historias.
 
+## Manual
+
+Escribe `story` y se muestra las funciones disponibles, su uso y ejemplos:
+
+![manual](https://github.com/user-attachments/assets/07244e05-3d73-4da8-9bce-ce59103d1261)
+
 ## Formato
 
 Usamos formato ⁠`<tipo>/<id>-<nombre-tarea>` como convención ampliamente adoptada en la industria.
+
+> En este caso, con la salvedad de usar mayúsculas y nombres abreviados para los tipos. Algo que, sin duda, puede generar inconvenientes y se puede considerar cambiar.
 
 - El tipo categoriza el propósito de la rama.
 - El ID al inicio conecta con sistemas de tickets (Jira, GitHub Issues).
@@ -16,15 +24,6 @@ Ejemplos
 
 - `FEAT/sc-1234-nueva-funcion` para ramas feature
 - `BF/sc-1234-arreglo-tal` para ramas bug.
-
-
-> En este caso, con la salvedad de usar mayúsculas y nombres abreviados para los tipos. Algo que, sin duda, puede generar inconvenientes y se puede considerar cambiar.
-
-## Manual
-
-Escribe `story` y se muestra las funciones disponibles, su uso y ejemplos:
-
-![manual](https://github.com/user-attachments/assets/07244e05-3d73-4da8-9bce-ce59103d1261)
 
 
 
