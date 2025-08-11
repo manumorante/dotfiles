@@ -78,7 +78,8 @@ Ejemplo:
 story focus
 ```
 
-<img width="1844" height="1024" alt="image" src="https://github.com/user-attachments/assets/31f6875f-d71a-4c56-819e-98fa4cf287ba" />
+![buscar](https://github.com/user-attachments/assets/9fed318c-7bd1-49c7-94fa-9e8a42714478)
+
 
 
 ## Notas
