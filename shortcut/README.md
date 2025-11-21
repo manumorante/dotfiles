@@ -1,1 +1,0 @@
-https://github.com/manumorante/shortcut-cli
