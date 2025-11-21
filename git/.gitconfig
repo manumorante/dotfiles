@@ -1,0 +1,12 @@
+# Default user configuration
+[user]
+    name = manumorante
+    email = [personal_email]
+
+# Personal repositories (higher priority)
+[includeIf "gitdir:~/projects/personal/"]
+    path = ~/.gitconfig-personal
+
+# Work repositories
+[includeIf "gitdir:~/projects/founderz/"]
+    path = ~/.gitconfig-work

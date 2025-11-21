@@ -1,0 +1,7 @@
+[user]
+    name = manumorante-fdz
+    email = [work_email]
+
+# Use work SSH key for GitHub
+[url "git@github-founderz:"]
+    insteadOf = git@github.com:
