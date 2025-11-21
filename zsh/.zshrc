@@ -10,11 +10,6 @@ plugins=(git)
 # Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-# Load external configuration files (custom)
-source $ZSH_CUSTOM/aliases.zsh
-source $ZSH_CUSTOM/functions.zsh
-source $ZSH_CUSTOM/shortcut.zsh
-
 # User configuration
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
