@@ -1,0 +1,26 @@
+# GitHub - manumorante (default/personal)
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_manumorante
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
+
+# GitHub - manumorante-fdz (founderz/work)
+Host github-founderz
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_founderz
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
+
+# Staging Founderz
+Host staging.founderz.com
+  HostName staging.founderz.com
+  User azureuser
+  IdentityFile ~/.ssh/id_rsa_staging
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
