@@ -26,6 +26,8 @@ Custom aliases and functions for zsh shell, organized by topic.
 | `confetti` | Raycast confetti |
 | `openz` | Open shell config in editor |
 | `restart` | Reload terminal session |
+| `myhelp` | Show cheatsheet of all custom commands |
+| `myclaude` | Open `~/.claude/CLAUDE.md` in editor |
 
 ## git.zsh - Git
 
