@@ -12,4 +12,5 @@ Personal configuration files for development environment.
 - **[prettier](prettier/)** - Code formatter configuration
 - **[biome](biome/)** - Code formatter and linter configuration
 - **[iTerm2](iTerm2/)** - iTerm2 terminal profile configuration
+- **[agents](agents/)** - Universal agent config (AGENTS.md, skills, agents)
 - **[hushlogin](hushlogin/)** - Suppress terminal login messages

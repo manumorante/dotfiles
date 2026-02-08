@@ -9,6 +9,7 @@ A dotfiles repo for macOS. Each top-level directory contains config files for on
 ## Repository Structure
 
 ```
+agents/         → Universal agent config (AGENTS.md, .skill-lock.json) — symlinked by Claude & Cursor
 biome/          → Biome linter/formatter config (biome.json + VS Code settings)
 gh/             → GitHub CLI config (config.yml, hosts.yml) with multi-account setup
 git/            → Git config: .gitconfig (conditional includes), .gitconfig-personal, .gitconfig-work, .gitignore-global
@@ -37,6 +38,7 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 - `functions.zsh` — Color output helpers (`red()`, `green()`, `cyan()`)
 - `git.zsh` — Git functions (`nah`, `gcol`, `gsplit`, `gundo`, `glthis`, `gbdall`, `hasChanges`, `gcmAnd`) and the `gh()` auto-switch wrapper
 - `node.zsh` — Node/npm utilities (package manager detection, `del_modules`, `get_scripts`, `get_run`)
+- `nvm.zsh` — NVM (Node Version Manager) initialization
 
 ## Installation Mapping (dotfiles → real location)
 
@@ -51,6 +53,8 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 | `gh/config.yml` | `~/.config/gh/config.yml` |
 | `gh/hosts.yml` | `~/.config/gh/hosts.yml` |
 | `oh-my-zsh/.oh-my-zsh/custom/*.zsh` | `~/.oh-my-zsh/custom/*.zsh` |
+| `agents/AGENTS.md` | `~/.agents/AGENTS.md` |
+| `agents/.skill-lock.json` | `~/.agents/.skill-lock.json` |
 | `hushlogin/.hushlogin` | `~/.hushlogin` |
 
 SSH keys are NOT in this repo — import them from 1Password into `~/.ssh/`.
