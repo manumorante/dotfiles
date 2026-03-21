@@ -1,27 +1,32 @@
-# OpenSpec shell completions
-fpath=("$HOME/.oh-my-zsh/custom/completions" $fpath)
-autoload -Uz compinit
-compinit
-
-# Path to Oh My Zsh installation
+# Oh My Zsh core
 export ZSH="$HOME/.oh-my-zsh"
 
-# Theme configuration
 ZSH_THEME="fwalch"
 
-# Plugins
-plugins=(git)
+# Shell behavior preferences
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
 
-# Load Oh My Zsh
+plugins=(git command-not-found)
+
+# OPENSPEC:START
+# OpenSpec shell completions configuration
+fpath=("$HOME/.oh-my-zsh/custom/completions" $fpath)
+# OPENSPEC:END
+
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# PATH (unique entries)
+typeset -U path PATH
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
-# NVM
+# Node / nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Antigravity
-export PATH="/Users/manumorante/.antigravity/antigravity/bin:$PATH"
+# Bun
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
