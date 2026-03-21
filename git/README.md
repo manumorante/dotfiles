@@ -24,6 +24,6 @@ Replace `[personal_email]` and `[work_email]` with actual emails (stored in 1Pas
 1. **SSH** (`~/.ssh/config`) routes each host to a different key
 2. **Git config** (`includeIf`) sets name/email per directory
 3. **Git URL rewrite** (`.gitconfig-work`) rewrites `git@github.com:` to `git@github-founderz:`
-4. **GitHub CLI** (`gh()` function) auto-switches account per directory
+4. **GitHub CLI**: switch account explicitly with `gh auth switch --user manumorante` or `gh auth switch --user manumorante-fdz`
 
-All four layers use the same directory convention (`~/projects/personal/` vs `~/projects/founderz/`).
+Git and SSH use the same directory convention (`~/projects/personal/` vs `~/projects/founderz/`); GitHub CLI account selection is explicit.
