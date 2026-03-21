@@ -9,9 +9,10 @@ Personal settings that differ from Biome defaults:
 - **Semicolons as needed** - `semicolons: "asNeeded"`
 - **Single quotes** - `quoteStyle: "single"`
 
-## Editor Integration
+## Require Config File
 
-The Biome extension for VSCode (Cursor) only activates when it detects a `biome.json` file in the project.
+ Only activate the extension when a `biome.json` file is found in the project.
+
 
 ## Project Setup
 
