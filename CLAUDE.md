@@ -23,12 +23,12 @@ zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git, NVM, Antigravi
 
 ## Dual GitHub Identity System
 
-The core architectural pattern: personal (`manumorante`) and work (`manumorante-fdz`) identities are auto-selected by directory path (`~/projects/personal/` vs `~/projects/founderz/`).
+The core architectural pattern: personal (`manumorante`) and work (`manumorante-fdz`) identities for Git/SSH are selected by directory path (`~/projects/personal/` vs `~/projects/founderz/`).
 
 Three layers coordinate this:
 1. **Git** (`git/.gitconfig`): `includeIf "gitdir:"` loads the right user name/email and SSH URL rewrite
 2. **SSH** (`ssh/config`): Separate keys per identity, work uses `Host github-founderz` alias
-3. **GitHub CLI** (`oh-my-zsh/.oh-my-zsh/custom/git.zsh`): `gh()` wrapper function runs `gh auth switch` before every command based on `pwd`
+3. **GitHub CLI** (`gh`): switch explicitly with `gh auth switch --user manumorante` or `gh auth switch --user manumorante-fdz` when needed
 
 ## Oh My Zsh Custom Files
 
@@ -36,7 +36,7 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 
 - `aliases.zsh` — General aliases (navigation, IDE, docker, shell)
 - `functions.zsh` — Color output helpers (`red()`, `green()`, `cyan()`)
-- `git.zsh` — Git functions (`nah`, `gcol`, `gsplit`, `gundo`, `glthis`, `gbdall`, `hasChanges`, `gcmAnd`) and the `gh()` auto-switch wrapper
+- `git.zsh` — Git functions (`nah`, `gcol`, `gsplit`, `gundo`, `glthis`, `gbdall`, `hasChanges`, `gcmAnd`)
 - `node.zsh` — Node/npm utilities (package manager detection, `del_modules`, `get_scripts`, `get_run`)
 - `nvm.zsh` — NVM (Node Version Manager) initialization
 

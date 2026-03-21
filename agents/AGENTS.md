@@ -19,7 +19,7 @@ Custom files in `~/.oh-my-zsh/custom/`: `aliases.zsh` (general), `functions.zsh`
 
 ## Two GitHub Identities (personal / work)
 
-Everything auto-switches by directory:
+Git/SSH auto-switch by directory:
 
 | | Personal | Work (Founderz) |
 |---|---|---|
@@ -27,7 +27,7 @@ Everything auto-switches by directory:
 | **GitHub user** | `manumorante` | `manumorante-fdz` |
 | **SSH** | default key | `git@github-founderz:` rewrite |
 
-How: `~/.gitconfig` `includeIf` per directory (name, email, SSH rewrite). `gh()` function in `git.zsh` runs `gh auth switch` per `pwd`.
+How: `~/.gitconfig` `includeIf` per directory (name, email, SSH rewrite). For GitHub CLI, switch explicitly when needed with `gh auth switch --user manumorante` or `gh auth switch --user manumorante-fdz`.
 
 ## Key Aliases & Functions
 
@@ -38,7 +38,6 @@ Only the ones that affect how Claude should work:
 - `nah` → discard ALL local changes + .lock files (asks confirmation)
 - `gsplit` / `gundo` → soft reset to origin/master for splitting branches / undo
 - `gbdall` → delete all merged local branches (safe `-d`)
-- `gh()` → auto-switch GitHub account wrapper (uses `command gh`)
 - `restart` → `exec $SHELL -l` (reload shell)
 - `myhelp` → cheatsheet of all custom commands
 
