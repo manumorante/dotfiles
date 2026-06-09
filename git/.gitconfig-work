@@ -5,3 +5,10 @@
 # Use work SSH key for GitHub
 [url "git@github-founderz:"]
     insteadOf = git@github.com:
+
+# Skip uppercase branch prefixes that collide with their lowercase twin on
+# macOS case-insensitive filesystem (prevents "new branch" spam every fetch)
+[remote "origin"]
+    fetch = ^refs/heads/FEAT/*
+    fetch = ^refs/heads/HF/*
+    fetch = ^refs/heads/BF/*
