@@ -1,12 +1,11 @@
-# GitHub CLI auto-switch account based on directory
+# GitHub CLI account: personal by default, work only inside the founderz tree
 gh() {
-  local current_dir=$(pwd)
+  local want="manumorante"
+  [[ "$PWD/" == */projects/founderz/* ]] && want="manumorante-fdz"
 
-  if [[ "$current_dir" == *"/projects/personal/"* ]]; then
-    command gh auth switch --user manumorante 2>/dev/null
-  elif [[ "$current_dir" == *"/projects/founderz/"* ]]; then
-    command gh auth switch --user manumorante-fdz 2>/dev/null
-  fi
+  local active
+  active=$(sed -n 's/^ *user: *//p' ~/.config/gh/hosts.yml 2>/dev/null | head -1)
+  [[ "$active" != "$want" ]] && command gh auth switch --user "$want" >/dev/null 2>&1
 
   command gh "$@"
 }
@@ -79,27 +78,20 @@ _gcol() {
 
 compdef _gcol gcol
 
-# Discard ALL local changes, .lock files, abort operations
+# Discard tracked changes and abort in-progress operations
 nah() {
-  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "Fuera de un repo"; return 1; }
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "Outside a git repo"; return 1; }
 
-  echo "⚠️  Descartar TODOS los cambios locales y archivos .lock"
-  read -q "REPLY?¿Continuar? (y/n) " || { echo ""; return 0; }
-  echo ""
+  git rebase --abort      >/dev/null 2>&1 || true
+  git merge --abort       >/dev/null 2>&1 || true
+  git cherry-pick --abort >/dev/null 2>&1 || true
+  git revert --abort      >/dev/null 2>&1 || true
 
-  git rebase --abort       >/dev/null 2>&1 || true
-  git merge --abort        >/dev/null 2>&1 || true
-  git cherry-pick --abort  >/dev/null 2>&1 || true
-  git revert --abort       >/dev/null 2>&1 || true
+  rm -f .git/index.lock .git/HEAD.lock .git/packed-refs.lock 2>/dev/null || true
 
-  find .git -name "*.lock" -type f -delete 2>/dev/null || true
+  git reset --hard >/dev/null
 
-  git reset --hard
-  git clean -df
-
-  git remote prune origin
-
-  echo "✨ Repo limpio"
+  echo "Repo reset to HEAD (tracked only)."
 }
 
 # Check for local git changes
@@ -185,6 +177,19 @@ gundo() {
   rm -f "$backup_file"
 
   echo "$(green 'Reset deshecho. Estado restaurado.')"
+}
+
+# Recent collaborator activity — usage: gwho [since] e.g. gwho "3 days ago"
+gwho() {
+  local since="${1:-7 days ago}"
+  echo ""
+  echo "$(cyan "Activity since: ${since}")"
+  echo ""
+  git log \
+    --no-merges \
+    --since="$since" \
+    --format="%C(bold cyan)%<(8,trunc)%al%Creset %C(yellow)%h%Creset %<(80,trunc)%s"
+  echo ""
 }
 
 # Delete all merged local branches (safe -d only)

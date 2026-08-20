@@ -22,6 +22,7 @@ alias confeti="confetti"
 # Shell management
 alias openz="code ~/.zshrc ~/.oh-my-zsh/custom/"
 alias myclaude="code ~/.claude/CLAUDE.md"
+alias sp-latest="git ls-remote --tags --sort=-v:refname https://github.com/obra/superpowers.git 'v*' | sed 's|.*refs/tags/||; s|\^{}||' | head -1"
 alias restart='exec $SHELL -l'
 
 # Quick reference for custom commands
@@ -35,7 +36,7 @@ myhelp() {
   echo "  GIT           glt (pull master)  nah (discard all)  gcol <branch>"
   echo "                gsplit / gundo (split branches)"
   echo "                gbdall (delete merged branches)"
-  echo "                gh (auto-switch account)"
+  echo "                gh (auto-switch account)  gwho (collaborator activity)"
   echo ""
   echo "                + omz git plugin (gss gp gl gcm gco gcb...)"
   echo ""
@@ -43,7 +44,7 @@ myhelp() {
   echo "                del-modules  rmnext"
   echo ""
   echo "  ---"
-  echo "  Config:       myclaude  openz"
+  echo "  Config:       myclaude  openz  sp-latest (superpowers release)"
   echo "  Dotfiles:     ~/projects/personal/dotfiles"
   echo ""
 }

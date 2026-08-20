@@ -3,8 +3,11 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="fwalch"
 
+# Default editor
+export EDITOR="cursor --wait"
+
 # Shell behavior preferences
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(git command-not-found)
@@ -30,3 +33,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# pnpm
+export PNPM_HOME="/Users/manumorante/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
