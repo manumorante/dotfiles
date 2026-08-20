@@ -30,7 +30,7 @@ myhelp() {
   echo "  IDE           code (cursor)  ca (cursor-agent)  openz"
   echo "  SHELL         restart  confetti  myhelp  daily-log"
   echo ""
-  echo "  GIT           glt (pull master)  nah (discard all)  gcol <branch>"
+  echo "  GIT           glt (pull master)  nah (discard all, pide confirmar)  gcol <branch>"
   echo "                gsplit / gundo (split branches)"
   echo "                gbdall (delete merged branches)"
   echo "                gh (auto-switch account)  gwho (collaborator activity)"

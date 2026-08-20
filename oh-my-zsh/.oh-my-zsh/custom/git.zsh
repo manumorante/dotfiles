@@ -78,20 +78,75 @@ _gcol() {
 
 compdef _gcol gcol
 
-# Discard tracked changes and abort in-progress operations
+# Discard tracked changes and abort in-progress operations. Asks before wiping.
 nah() {
-  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "Outside a git repo"; return 1; }
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "$(red 'No estás en un repositorio git')"; return 1; }
+
+  local force=false
+  [[ "$1" == "-y" || "$1" == "--yes" ]] && force=true
+
+  local gitdir=$(git rev-parse --git-dir)
+  local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+  # In-progress operations that nah would abort
+  local -a ops
+  [[ -d "$gitdir/rebase-merge" || -d "$gitdir/rebase-apply" ]] && ops+=("rebase")
+  [[ -f "$gitdir/MERGE_HEAD" ]]                               && ops+=("merge")
+  [[ -f "$gitdir/CHERRY_PICK_HEAD" ]]                         && ops+=("cherry-pick")
+  [[ -f "$gitdir/REVERT_HEAD" ]]                              && ops+=("revert")
+
+  # Tracked changes (staged + unstaged) vs untracked (kept)
+  local -a tracked untracked
+  tracked=(${(f)"$(git status --porcelain --untracked-files=no 2>/dev/null)"})
+  untracked=(${(f)"$(git ls-files --others --exclude-standard 2>/dev/null)"})
+
+  local -a locks
+  for lock in "$gitdir/index.lock" "$gitdir/HEAD.lock" "$gitdir/packed-refs.lock"; do
+    [[ -f "$lock" ]] && locks+=("${lock:t}")
+  done
+
+  if [[ ${#tracked[@]} -eq 0 && ${#ops[@]} -eq 0 && ${#locks[@]} -eq 0 ]]; then
+    echo "$(green '✓ Nada que descartar.') $(cyan "${branch}")$([[ ${#untracked[@]} -gt 0 ]] && echo " · ${#untracked[@]} sin trackear (se mantienen)")"
+    return 0
+  fi
+
+  echo ""
+  echo "$(red '⚠  nah') $(cyan "· ${branch}")"
+  echo ""
+
+  if [[ ${#tracked[@]} -gt 0 ]]; then
+    local n=${#tracked[@]}
+    echo "$(red "   ✗ ${n} archivo$([[ $n -gt 1 ]] && echo s) trackeado$([[ $n -gt 1 ]] && echo s) se resetea$([[ $n -gt 1 ]] && echo n) a HEAD")"
+    local shown=0
+    for line in "${tracked[@]}"; do
+      (( shown++ >= 10 )) && { echo "        $(cyan "… y $(( ${#tracked[@]} - 10 )) más")"; break; }
+      echo "        ${line}"
+    done
+  fi
+
+  [[ ${#ops[@]} -gt 0 ]]   && echo "$(red "   ✗ en curso: ${(j:, :)ops} → se aborta")"
+  [[ ${#locks[@]} -gt 0 ]] && echo "$(red "   ✗ locks: ${(j:, :)locks} → se borran")"
+  [[ ${#untracked[@]} -gt 0 ]] && echo "$(green "   ✓ ${#untracked[@]} sin trackear se mantiene$([[ ${#untracked[@]} -gt 1 ]] && echo n)")"
+
+  echo ""
+
+  if [[ "$force" == "false" ]]; then
+    local answer
+    read "answer?$(red '¿Descartar? Esto no se puede deshacer') [y/N] "
+    echo ""
+    [[ "$answer" == [yYsS] ]] || { echo "$(cyan 'Cancelado. Nada tocado.')"; return 1; }
+  fi
 
   git rebase --abort      >/dev/null 2>&1 || true
   git merge --abort       >/dev/null 2>&1 || true
   git cherry-pick --abort >/dev/null 2>&1 || true
   git revert --abort      >/dev/null 2>&1 || true
 
-  rm -f .git/index.lock .git/HEAD.lock .git/packed-refs.lock 2>/dev/null || true
+  rm -f "$gitdir/index.lock" "$gitdir/HEAD.lock" "$gitdir/packed-refs.lock" 2>/dev/null || true
 
   git reset --hard >/dev/null
 
-  echo "Repo reset to HEAD (tracked only)."
+  echo "$(green '✓ Repo reseteado a HEAD') $(cyan '(solo trackeados)')"
 }
 
 # Check for local git changes
