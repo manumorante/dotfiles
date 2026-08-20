@@ -9,8 +9,6 @@ alias code='cursor'
 alias ca="cursor-agent"
 
 # Docker
-work="/Users/manumorante/projects/work/founderz"
-alias cphp="cd $work && docker compose --env-file .env.local exec php bash"
 
 # Daily Log
 alias daily-log='/Users/manumorante/projects/personal/ia/daily-log/daily-log'
@@ -31,7 +29,6 @@ myhelp() {
   echo "  NAVIGATION    ..  ll  -"
   echo "  IDE           code (cursor)  ca (cursor-agent)  openz"
   echo "  SHELL         restart  confetti  myhelp  daily-log"
-  echo "  DOCKER        cphp"
   echo ""
   echo "  GIT           glt (pull master)  nah (discard all)  gcol <branch>"
   echo "                gsplit / gundo (split branches)"

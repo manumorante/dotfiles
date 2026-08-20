@@ -22,7 +22,6 @@ Custom aliases and functions for zsh shell, organized by topic.
 | `ll` | List files sorted by size |
 | `code` | Open Cursor editor |
 | `ca` | Open Cursor agent CLI |
-| `cphp` | Enter PHP container (founderz) |
 | `confetti` | Raycast confetti |
 | `openz` | Open shell config in editor |
 | `restart` | Reload terminal session |
