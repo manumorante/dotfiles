@@ -12,11 +12,6 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(git command-not-found)
 
-# OPENSPEC:START
-# OpenSpec shell completions configuration
-fpath=("$HOME/.oh-my-zsh/custom/completions" $fpath)
-# OPENSPEC:END
-
 source $ZSH/oh-my-zsh.sh
 
 # PATH (unique entries)
