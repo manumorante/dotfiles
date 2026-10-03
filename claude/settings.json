@@ -1,0 +1,64 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(npm info:*)",
+      "WebFetch(domain:claude-plugins.dev)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:mcpmarket.com)",
+      "Bash(git add:*)",
+      "Bash(gh api graphql:*)",
+      "Bash(gh search commits:*)",
+      "Bash(osascript:*)",
+      "Bash(icalBuddy:*)",
+      "Bash(killall:*)",
+      "Bash(claude --version)",
+      "Bash(npx claude:*)"
+    ],
+    "defaultMode": "auto",
+    "mode": "smart",
+    "autoApprove": {
+      "read": true,
+      "glob": true,
+      "grep": true,
+      "bash": {
+        "patterns": [
+          "git status*",
+          "git diff*",
+          "git log*",
+          "git branch*",
+          "git show*",
+          "ls*",
+          "pwd",
+          "cat*",
+          "which*",
+          "node --version",
+          "npm --version",
+          "php --version",
+          "composer --version"
+        ]
+      }
+    }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "feature-dev@claude-plugins-official": false
+  },
+  "effortLevel": "medium",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": false,
+  "model": "opus"
+}

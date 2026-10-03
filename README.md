@@ -13,3 +13,7 @@ Personal configuration files for development environment.
 - **[biome](biome/)** - Code formatter and linter configuration
 - **[iTerm2](iTerm2/)** - iTerm2 terminal profile configuration
 - **[hushlogin](hushlogin/)** - Suppress terminal login messages
+- **[karabiner](karabiner/)** - Karabiner-Elements key remapping
+- **[cursor](cursor/)** - Cursor editor settings and keybindings
+- **[claude](claude/)** - Claude Code global settings
+- **[codex](codex/)** - Codex preferences

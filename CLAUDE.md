@@ -11,14 +11,18 @@ A dotfiles repo for macOS. Each top-level directory contains config files for on
 ```
 agents/         → Universal agent config (AGENTS.md, .skill-lock.json) — symlinked by Claude & Cursor
 biome/          → Biome linter/formatter config (biome.json + VS Code settings)
+claude/         → Claude Code global settings.json (without autoMode)
+codex/          → Codex config.toml preferences (machine-specific sections removed)
+cursor/         → Cursor settings.json and keybindings.json
 gh/             → GitHub CLI config (config.yml, hosts.yml) with multi-account setup
 git/            → Git config: .gitconfig (conditional includes), .gitconfig-personal, .gitconfig-work, .gitignore-global
 hushlogin/      → .hushlogin (suppress terminal login message)
 iTerm2/         → iTerm2 profile JSON
+karabiner/      → Karabiner-Elements key remapping
 oh-my-zsh/      → Custom Oh My Zsh files in .oh-my-zsh/custom/
 prettier/       → Prettier config
 ssh/            → SSH config with host aliases for dual GitHub identity
-zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git, NVM, Antigravity)
+zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git, NVM, Antigravity) and .zprofile (Homebrew, OrbStack)
 ```
 
 ## Dual GitHub Identity System
@@ -45,6 +49,7 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 | Repo path | Destination |
 |-----------|-------------|
 | `zsh/.zshrc` | `~/.zshrc` |
+| `zsh/.zprofile` | `~/.zprofile` |
 | `git/.gitconfig` | `~/.gitconfig` |
 | `git/.gitconfig-personal` | `~/.gitconfig-personal` |
 | `git/.gitconfig-work` | `~/.gitconfig-work` |
@@ -56,6 +61,10 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 | `agents/AGENTS.md` | `~/.agents/AGENTS.md` |
 | `agents/.skill-lock.json` | `~/.agents/.skill-lock.json` |
 | `hushlogin/.hushlogin` | `~/.hushlogin` |
+| `karabiner/karabiner.json` | `~/.config/karabiner/karabiner.json` |
+| `cursor/*.json` | `~/Library/Application Support/Cursor/User/` |
+| `claude/settings.json` | `~/.claude/settings.json` |
+| `codex/config.toml` | `~/.codex/config.toml` |
 
 SSH keys are NOT in this repo — import them from 1Password into `~/.ssh/`.
 After copying `gh/` configs, authenticate both accounts with `gh auth login`.
@@ -68,6 +77,7 @@ Sensitive values are replaced with placeholders. NEVER commit real values.
 |-------------|-------|---------------------|
 | `[personal_email]` | `git/.gitconfig`, `git/.gitconfig-personal` | Personal email (1Password) |
 | `[work_email]` | `git/.gitconfig-work` | Work email (1Password) |
+| `[shortcut_api_token]` | `codex/config.toml` | Shortcut API token (1Password) |
 
 When editing config files, always check that no real emails, tokens, or keys leak into the commit.
 

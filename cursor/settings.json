@@ -1,0 +1,28 @@
+{
+	"biome.requireConfigFile": true,
+	"window.commandCenter": true,
+	"git.confirmSync": false,
+	"diffEditor.renderSideBySide": false,
+	"security.promptForLocalFileProtocolHandling": false,
+	"biome.requireConfiguration": true,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"tailwindCSS.rootFontSize": 10,
+	"tailwindCSS.includeLanguages": {
+		"blade": "html"
+	},
+	"tailwindCSS.experimental.classRegex": [
+		["@?class\\(([^)]*)\\)", "['|\"]([^'\"]*)['|\"]"]
+	],
+	"git.blame.editorDecoration.enabled": true,
+	"git.blame.statusBarItem.enabled": true,
+	"workbench.preferredDarkColorTheme": "Cursor Dark Midnight",
+	"workbench.preferredLightColorTheme": "Default Light Modern",
+	"window.autoDetectColorScheme": true,
+	"files.autoSave": "onWindowChange",
+	"editor.fontSize": 14,
+	"[markdown]": {
+		"diffEditor.ignoreTrimWhitespace": true
+	},
+	"git.openRepositoryInParentFolders": "always",
+	"cursor.composer.queueMessageDefaultBehavior": "steer"
+}
