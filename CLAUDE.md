@@ -38,7 +38,7 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 - `functions.zsh` — Color output helpers (`red()`, `green()`, `cyan()`)
 - `git.zsh` — Git functions (`nah`, `gcol`, `gsplit`, `gundo`, `glthis`, `gbdall`, `hasChanges`, `gcmAnd`)
 - `node.zsh` — Node/npm utilities (package manager detection, `del_modules`, `get_scripts`, `get_run`)
-- `nvm.zsh` — NVM (Node Version Manager) initialization
+- `nvm.zsh` — NVM (Node Version Manager) initialization, plus automatic `nvm use` in folders with a `.nvmrc`
 
 ## Installation Mapping (dotfiles → real location)
 
