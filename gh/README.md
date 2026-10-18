@@ -1,6 +1,6 @@
 # GitHub CLI Configuration
 
-Preferences and multi-account setup for `gh`.
+Preferences for `gh`.
 
 ## Files
 
@@ -12,7 +12,7 @@ Preferences and multi-account setup for `gh`.
 ```bash
 mkdir -p ~/.config/gh
 cp config.yml hosts.yml ~/.config/gh/
-gh auth login  # Authenticate both accounts
+gh auth login
 ```
 
 ## Aliases
@@ -21,4 +21,4 @@ gh auth login  # Authenticate both accounts
 
 ## Notes
 
-After copying, you need to authenticate both accounts with `gh auth login`. The tokens are managed by `gh` itself, not stored in these files.
+The tokens are managed by `gh` itself, not stored in these files.
