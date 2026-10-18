@@ -6,12 +6,8 @@ alias ll='ls -lh | awk "{print \$5, \$2, \$9}" | sort -k2,2rn | column -t'
 
 # IDE
 alias code='cursor'
-alias ca="cursor-agent"
 
 # Docker
-
-# Daily Log
-alias daily-log='/Users/manumorante/projects/personal/ia/daily-log/daily-log'
 
 # Confetti
 alias confetti="open raycast://extensions/raycast/raycast/confetti"
@@ -27,8 +23,8 @@ alias restart='exec $SHELL -l'
 myhelp() {
   echo ""
   echo "  NAVIGATION    ..  ll  -"
-  echo "  IDE           code (cursor)  ca (cursor-agent)  openz"
-  echo "  SHELL         restart  confetti  myhelp  daily-log"
+  echo "  IDE           code (cursor)  openz"
+  echo "  SHELL         restart  confetti  myhelp"
   echo ""
   echo "  GIT           glt (pull master)  nah (discard all, pide confirmar)  gcol <branch>"
   echo "                gsplit / gundo (split branches)"

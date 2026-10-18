@@ -21,7 +21,6 @@ Custom aliases and functions for zsh shell, organized by topic.
 | `-` | Go to previous directory |
 | `ll` | List files sorted by size |
 | `code` | Open Cursor editor |
-| `ca` | Open Cursor agent CLI |
 | `confetti` | Raycast confetti |
 | `openz` | Open shell config in editor |
 | `restart` | Reload terminal session |
