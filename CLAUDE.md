@@ -17,7 +17,6 @@ hushlogin/      → .hushlogin (suppress terminal login message)
 iTerm2/         → iTerm2 profile JSON
 oh-my-zsh/      → Custom Oh My Zsh files in .oh-my-zsh/custom/
 prettier/       → Prettier config
-ssh/            → SSH config for GitHub
 zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git)
 ```
 
@@ -38,7 +37,6 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 | `zsh/.zshrc` | `~/.zshrc` |
 | `git/.gitconfig` | `~/.gitconfig` |
 | `git/.gitignore-global` | `~/.config/git/ignore` |
-| `ssh/config` | `~/.ssh/config` |
 | `gh/config.yml` | `~/.config/gh/config.yml` |
 | `gh/hosts.yml` | `~/.config/gh/hosts.yml` |
 | `oh-my-zsh/.oh-my-zsh/custom/*.zsh` | `~/.oh-my-zsh/custom/*.zsh` |

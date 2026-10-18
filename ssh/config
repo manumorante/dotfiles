@@ -1,8 +1,0 @@
-# GitHub - manumorante (default/personal)
-Host github.com
-  HostName github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519_manumorante
-  IdentitiesOnly yes
-  AddKeysToAgent yes
-  UseKeychain yes

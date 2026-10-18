@@ -6,7 +6,6 @@ Personal configuration files for development environment.
 
 - **[oh-my-zsh](oh-my-zsh/)** - Custom aliases and functions (git, node, general)
 - **[zsh](zsh/)** - Main zsh configuration (.zshrc)
-- **[ssh](ssh/)** - SSH host config for GitHub
 - **[git](git/)** - Git configuration
 - **[gh](gh/)** - GitHub CLI preferences
 - **[prettier](prettier/)** - Code formatter configuration
