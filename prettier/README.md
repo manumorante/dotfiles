@@ -12,12 +12,11 @@ Code formatter configuration for consistent code style.
 
 ## Installation
 
-Copy `.prettierrc` to your project root or home directory:
+Copy `.prettierrc` to the root of each project that uses it (not to the home directory: the
+Tailwind plugin fails in projects that do not install it):
 
 ```bash
-cp .prettierrc ~/.prettierrc  # Global
-# or
-cp .prettierrc ./project/.prettierrc  # Project-specific
+cp .prettierrc ./project/.prettierrc
 ```
 
 ## Requirements
