@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="fwalch"
 
 # Default editor
-export EDITOR="cursor --wait"
+export EDITOR="nano"
 
 # Shell behavior preferences
 # ENABLE_CORRECTION="true"
