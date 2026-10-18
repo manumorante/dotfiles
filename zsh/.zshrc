@@ -17,11 +17,8 @@ source $ZSH/oh-my-zsh.sh
 # PATH (unique entries)
 typeset -U path PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Node / nvm: loaded in ~/.oh-my-zsh/custom/nvm.zsh
 
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

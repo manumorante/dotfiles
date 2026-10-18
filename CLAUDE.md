@@ -18,7 +18,7 @@ iTerm2/         → iTerm2 profile JSON
 oh-my-zsh/      → Custom Oh My Zsh files in .oh-my-zsh/custom/
 prettier/       → Prettier config
 ssh/            → SSH config with host aliases for dual GitHub identity
-zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git, NVM, Antigravity)
+zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git)
 ```
 
 ## Dual GitHub Identity System
