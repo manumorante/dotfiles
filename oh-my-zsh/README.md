@@ -31,7 +31,6 @@ Custom aliases and functions for zsh shell, organized by topic.
 
 | Command | Description |
 |---------|-------------|
-| `gh` | Auto-switch GitHub account by directory (personal/work) |
 | `glt` | Fetch + pull only master |
 | `gcol <branch>` | Checkout with branch autocompletion |
 | `nah` | Discard ALL local changes, .lock files, abort operations |

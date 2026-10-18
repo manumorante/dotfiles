@@ -1,15 +1,3 @@
-# GitHub CLI account: personal by default, work only inside the founderz tree
-gh() {
-  local want="manumorante"
-  [[ "$PWD/" == */projects/founderz/* ]] && want="manumorante-fdz"
-
-  local active
-  active=$(sed -n 's/^ *user: *//p' ~/.config/gh/hosts.yml 2>/dev/null | head -1)
-  [[ "$active" != "$want" ]] && command gh auth switch --user "$want" >/dev/null 2>&1
-
-  command gh "$@"
-}
-
 # Fetch + pull only master (avoids errors from other remote branches)
 alias glt="glthis"
 

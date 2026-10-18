@@ -29,7 +29,7 @@ myhelp() {
   echo "  GIT           glt (pull master)  nah (discard all, pide confirmar)  gcol <branch>"
   echo "                gsplit / gundo (split branches)"
   echo "                gbdall (delete merged branches)"
-  echo "                gh (auto-switch account)  gwho (collaborator activity)"
+  echo "                gwho (collaborator activity)"
   echo ""
   echo "                + omz git plugin (gss gp gl gcm gco gcb...)"
   echo ""
