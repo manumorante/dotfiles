@@ -11,8 +11,5 @@
 [includeIf "gitdir:~/projects/founderz/"]
     path = ~/.gitconfig-work
 
-[core]
-    ignorecase = false
-
 [push]
     autoSetupRemote = true
