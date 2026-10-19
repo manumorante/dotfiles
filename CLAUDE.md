@@ -17,7 +17,7 @@ hushlogin/      → .hushlogin (suppress terminal login message)
 iTerm2/         → iTerm2 profile JSON
 oh-my-zsh/      → Custom Oh My Zsh files in .oh-my-zsh/custom/
 prettier/       → Prettier config
-zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git)
+zsh/            → .zshrc (Oh My Zsh theme: fwalch, plugin: git), .zprofile (Homebrew PATH)
 ```
 
 ## Oh My Zsh Custom Files
@@ -29,12 +29,14 @@ All `*.zsh` files in `oh-my-zsh/.oh-my-zsh/custom/` are auto-loaded by Oh My Zsh
 - `git.zsh` — Git functions (`nah`, `gcol`, `gsplit`, `gundo`, `glthis`, `gbdall`, `hasChanges`, `gcmAnd`)
 - `node.zsh` — Node/npm utilities (package manager detection, `del_modules`, `get_scripts`, `get_run`)
 - `nvm.zsh` — NVM (Node Version Manager) initialization, plus automatic `nvm use` in folders with a `.nvmrc`
+- `tex.zsh` — TinyTeX (`~/Library/TinyTeX`) on PATH
 
 ## Installation Mapping (dotfiles → real location)
 
 | Repo path | Destination |
 |-----------|-------------|
 | `zsh/.zshrc` | `~/.zshrc` |
+| `zsh/.zprofile` | `~/.zprofile` |
 | `git/.gitconfig` | `~/.gitconfig` |
 | `git/.gitignore-global` | `~/.config/git/ignore` |
 | `gh/config.yml` | `~/.config/gh/config.yml` |

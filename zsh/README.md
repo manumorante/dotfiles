@@ -1,6 +1,6 @@
 # Zsh Configuration
 
-Main zsh configuration file (`.zshrc`).
+Main zsh configuration file (`.zshrc`), plus `.zprofile`, which runs `brew shellenv` so Homebrew tools come before macOS system ones in PATH.
 
 ## Configuration
 
@@ -22,7 +22,7 @@ Adds pnpm to PATH:
 
 ## Installation
 
-1. Copy `.zshrc` to `~/.zshrc`
+1. Copy `.zshrc` to `~/.zshrc` and `.zprofile` to `~/.zprofile`
 2. Ensure Oh My Zsh is installed
 3. Install NVM if using Node.js
 4. Install pnpm if using it

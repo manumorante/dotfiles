@@ -10,7 +10,8 @@ Custom aliases and functions for zsh shell, organized by topic.
 ├── functions.zsh    → Color helpers (red, green, cyan)
 ├── git.zsh          → Git aliases and functions
 ├── node.zsh         → Node.js/npm aliases and functions
-└── nvm.zsh          → NVM configuration
+├── nvm.zsh          → NVM configuration
+└── tex.zsh          → TinyTeX on PATH
 ```
 
 ## aliases.zsh - General
